@@ -77,6 +77,8 @@ def get_conversational_chain(vector_store):
     llm = ChatGoogleGenerativeAI(model="gemini-2.0-flash", temperature=0.7, google_api_key=api_key)
     
     # Use ConversationBufferMemory to store chat history, explicitly setting output_key
+    # The LangChainDeprecationWarning about memory migration is a general heads-up for future API changes,
+    # but these parameters are still valid for this specific memory class.
     memory = ConversationBufferMemory(memory_key='chat_history', return_messages=True, output_key='answer')
     
     # Create a ConversationalRetrievalChain.
@@ -139,8 +141,8 @@ def handle_user_input(user_question):
     # Call the conversational chain with the user's question
     with st.spinner("Thinking..."):
         try:
-            # The ConversationalRetrievalChain handles the chat history automatically
-            response = st.session_state.conversation({'question': user_question})
+            # Replaced deprecated __call__ with .invoke()
+            response = st.session_state.conversation.invoke({'question': user_question})
             st.session_state.chat_history.append({"role": "user", "content": user_question})
             st.session_state.chat_history.append({"role": "assistant", "content": response['answer']})
         except Exception as e:
