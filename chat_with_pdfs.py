@@ -12,7 +12,7 @@ import os
 # For local development, set your GOOGLE_API_KEY as an environment variable.
 # Example: os.environ["GOOGLE_API_KEY"] = "YOUR_API_KEY_HERE"
 # In Canvas, this will be automatically handled.
-api_key = "AIzaSyAuPbJ1e8JRgp5NRJrOsM7X0of0QZKq8A4" # Leave this empty; Canvas will inject the key at runtime for generative-language.googleapis.com
+api_key = "AIzaSybuPbJ1e9JRgq5eRJrOsM560of0QZKq8A6" # Leave this empty; Canvas will inject the key at runtime for generative-language.googleapis.com
 
 # --- Utility Functions ---
 
