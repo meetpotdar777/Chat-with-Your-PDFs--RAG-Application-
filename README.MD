@@ -62,11 +62,11 @@ A ConversationalRetrievalChain is constructed. This chain takes a user's questio
 
 #### When a user types a question:
 
-##### Internal Self-Explanation: The system first checks if the question is about its own functionality (e.g., "How do you work with PDFs?"). If it is, a predefined, informative response is immediately provided, avoiding unnecessary LLM calls.
+- Internal Self-Explanation: The system first checks if the question is about its own functionality (e.g., "How do you work with PDFs?"). If it is, a predefined, informative response is immediately provided, avoiding unnecessary LLM calls.
 
-##### RAG Query: If the question is not an internal query, it's sent to the ConversationalRetrievalChain. This chain then performs the retrieval (finding relevant PDF chunks) and generation (using Gemini) steps.
+- RAG Query: If the question is not an internal query, it's sent to the ConversationalRetrievalChain. This chain then performs the retrieval (finding relevant PDF chunks) and generation (using Gemini) steps.
 
-##### The user's question and the bot's answer are appended to the st.session_state.chat_history and displayed in the Streamlit UI.
+- The user's question and the bot's answer are appended to the st.session_state.chat_history and displayed in the Streamlit UI.
 
 ## 🚀 Setup and Installation
 
