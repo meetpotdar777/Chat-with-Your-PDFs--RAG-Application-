@@ -34,23 +34,23 @@ User-Friendly Interface: A simple and intuitive Streamlit web application.
 
 The core of this application is the Retrieval-Augmented Generation (RAG) pattern, integrated with Streamlit for the user interface.
 
-Document Upload & Text Extraction:
+### Document Upload & Text Extraction:
 
 Users upload one or more .pdf files via the Streamlit file uploader (st.file_uploader).
 
 The PyPDF2 library is used to read each PDF page and extract all available text content (get_pdf_text).
 
-### Text Chunking:
+#### Text Chunking:
 
 The extracted raw text (potentially very long) is then broken down into smaller, overlapping segments or "chunks" using LangChain's RecursiveCharacterTextSplitter (get_text_chunks). This is crucial because LLMs have token limits, and it helps focus the retrieval on more granular, relevant information.
 
-### Embedding & Vector Storage:
+#### Embedding & Vector Storage:
 
 Each text chunk is transformed into a numerical vector (an "embedding") using GoogleGenerativeAIEmbeddings (models/embedding-001). These embeddings represent the semantic meaning of the text.
 
 These embeddings, along with their corresponding text chunks, are then stored in a FAISS (Facebook AI Similarity Search) vector store (get_vector_store). FAISS is a library for efficient similarity search, allowing the system to quickly find text chunks that are semantically similar to a user's query.
 
-### Conversational Chain Setup (get_conversational_chain):
+#### Conversational Chain Setup (get_conversational_chain):
 
 A ChatGoogleGenerativeAI model (gemini-2.0-flash) is initialized as the Large Language Model (LLM) for generating responses.
 
@@ -58,13 +58,13 @@ ConversationBufferMemory from LangChain is used to maintain the chat history, en
 
 A ConversationalRetrievalChain is constructed. This chain takes a user's question, uses the FAISS vector store to retrieve relevant document chunks, and then feeds these chunks along with the chat history to the Gemini LLM to generate a coherent answer.
 
-### User Input Handling (handle_user_input):
+#### User Input Handling (handle_user_input):
 
 ### When a user types a question:
 
-### Internal Self-Explanation: The system first checks if the question is about its own functionality (e.g., "How do you work with PDFs?"). If it is, a predefined, informative response is immediately provided, avoiding unnecessary LLM calls.
+#### Internal Self-Explanation: The system first checks if the question is about its own functionality (e.g., "How do you work with PDFs?"). If it is, a predefined, informative response is immediately provided, avoiding unnecessary LLM calls.
 
-### RAG Query: If the question is not an internal query, it's sent to the ConversationalRetrievalChain. This chain then performs the retrieval (finding relevant PDF chunks) and generation (using Gemini) steps.
+#### RAG Query: If the question is not an internal query, it's sent to the ConversationalRetrievalChain. This chain then performs the retrieval (finding relevant PDF chunks) and generation (using Gemini) steps.
 
 The user's question and the bot's answer are appended to the st.session_state.chat_history and displayed in the Streamlit UI.
 
