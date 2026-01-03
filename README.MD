@@ -58,15 +58,15 @@ ConversationBufferMemory from LangChain is used to maintain the chat history, en
 
 A ConversationalRetrievalChain is constructed. This chain takes a user's question, uses the FAISS vector store to retrieve relevant document chunks, and then feeds these chunks along with the chat history to the Gemini LLM to generate a coherent answer.
 
-#### User Input Handling (handle_user_input):
+### User Input Handling (handle_user_input):
 
-### When a user types a question:
+#### When a user types a question:
 
-#### Internal Self-Explanation: The system first checks if the question is about its own functionality (e.g., "How do you work with PDFs?"). If it is, a predefined, informative response is immediately provided, avoiding unnecessary LLM calls.
+##### Internal Self-Explanation: The system first checks if the question is about its own functionality (e.g., "How do you work with PDFs?"). If it is, a predefined, informative response is immediately provided, avoiding unnecessary LLM calls.
 
-#### RAG Query: If the question is not an internal query, it's sent to the ConversationalRetrievalChain. This chain then performs the retrieval (finding relevant PDF chunks) and generation (using Gemini) steps.
+##### RAG Query: If the question is not an internal query, it's sent to the ConversationalRetrievalChain. This chain then performs the retrieval (finding relevant PDF chunks) and generation (using Gemini) steps.
 
-The user's question and the bot's answer are appended to the st.session_state.chat_history and displayed in the Streamlit UI.
+##### The user's question and the bot's answer are appended to the st.session_state.chat_history and displayed in the Streamlit UI.
 
 ## 🚀 Setup and Installation
 
